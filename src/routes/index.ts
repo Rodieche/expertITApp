@@ -1,0 +1,1 @@
+export { router as customerRouter } from './customers/customer.routes';
