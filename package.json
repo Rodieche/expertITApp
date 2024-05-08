@@ -1,5 +1,5 @@
 {
-  "name": "expertitapp",
+  "name": "campersApp",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -27,6 +27,7 @@
     "express-validator": "^7.0.1",
     "mongoose": "^8.3.3",
     "morgan": "^1.10.0",
-    "rimraf": "^5.0.5"
+    "rimraf": "^5.0.5",
+    "winston": "^3.13.0"
   }
 }
