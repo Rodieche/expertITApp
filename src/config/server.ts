@@ -3,8 +3,9 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import morgan from 'morgan';
 import { customerRouter } from '../routes';
-import { MongoDatabase } from '../data/mongo';
+
 import { envs } from '../plugins/envs.plugin';
+import { MongoDatabase } from './Database';
 
 export class Server{
 

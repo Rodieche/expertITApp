@@ -1,7 +1,8 @@
 import { IUser } from "..";
 
 export interface ICustomer{
-    id?: any;
+    _id?: any;
     name: string;
-    users?: IUser[];
+    slug: string;
+    // users?: IUser[];
 } 
