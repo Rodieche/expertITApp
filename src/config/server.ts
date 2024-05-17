@@ -5,7 +5,7 @@ import morgan from 'morgan';
 import { customerRouter } from '../routes';
 
 import { envs } from '../plugins/envs.plugin';
-import { MongoDatabase } from './Database';
+import { MongoDatabase } from './';
 
 export class Server{
 

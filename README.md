@@ -9,7 +9,7 @@ git clone https://github.com/Rodieche/expertITApp.git
 npm install
 ```
 ```
-docker-composer -d up
+docker compose up -d
 ```
 5. Start the server
 ```
