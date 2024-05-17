@@ -6,7 +6,7 @@ git clone https://github.com/Rodieche/expertITApp.git
 3. Add the environment variables in .env file  
 4. Run the next commands:
 ```
-npm run init
+npm install
 ```
 ```
 docker-composer -d up
