@@ -1,9 +1,8 @@
-import { NextFunction, Request, Response } from "express";
+import { Request, Response } from "express";
 import { Customer } from "../../models";
-import { MyRequest } from "../../dtos";
 import { errorResponse, successfulResponse } from "../../middlewares";
 
-export const createCustomer = async (req: Request, res: Response, next: NextFunction) => {
+export const createCustomer = async (req: Request, res: Response) => {
     const { name } = req.body;
     console.log(name);
     try{
@@ -18,12 +17,10 @@ export const createCustomer = async (req: Request, res: Response, next: NextFunc
 }
 
 export const showCustomers = (req: Request, res: Response) => {
-    console.log(req.body);
 }
 
 export const showSingleCustomer = async (req: Request, res: Response) => {
     const { slug } = req.params;
-    console.log(slug);
     try{
         const customer = await Customer.find({ slug: slug });
         if(!customer){

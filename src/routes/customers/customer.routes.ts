@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { createCustomer, showSingleCustomer } from "../../controllers";
-import { check } from "express-validator";
+import { createCustomer, showCustomers, showSingleCustomer } from "../../controllers";
+import { check, query } from "express-validator";
 import { validateFields } from "../../middlewares";
 
 export const router = Router();
@@ -12,6 +12,14 @@ router.route('/')
         validateFields
     ], 
     createCustomer
+)
+.get(
+    [
+        query('limit').isInt({ min: 0 }).optional(),
+        query('skip').isInt({ min: 0 }).optional(),
+        validateFields
+    ],
+    showCustomers
 )
 
 router.route('/:slug')
