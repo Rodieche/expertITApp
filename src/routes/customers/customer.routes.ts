@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { createCustomer, deleteSingleCustomer, showCustomers, showSingleCustomer, updateSingleCustomer } from "../../controllers";
 import { check, query } from "express-validator";
-import { customerExist, validateFields } from "../../middlewares";
+import { IsValidCustomer, customerExist, validateFields } from "../../middlewares";
 
 export const router = Router();
 
@@ -25,19 +25,25 @@ router.route('/')
 router.route('/:slug')
 .get(
     [
+        check('slug').isString().not().optional(),
+        check('slug').custom(IsValidCustomer),
         check('slug').custom(customerExist)
     ],
     showSingleCustomer
 )
 .put(
     [
-        check('slug').custom(customerExist)
+        check('slug').isMongoId(),
+        check('slug').custom(customerExist),
+        check('slug').custom(IsValidCustomer),
     ],
     updateSingleCustomer
 )
 .delete(
     [
-        check('slug').custom(customerExist)
+        check('slug').isMongoId(),
+        check('slug').custom(customerExist),
+        check('slug').custom(IsValidCustomer),
     ],
     deleteSingleCustomer
 )

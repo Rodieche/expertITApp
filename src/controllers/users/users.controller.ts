@@ -37,16 +37,7 @@ export const showUser = async (req: Request, res: Response) => {
     const { email } = req.params;
     try{
         const user = await User.findOne({ email });
-        if(!user || !user.state){
-            const status = 404;
-            const response = {
-                error: true,
-                status,
-                message: 'User not found'
-            }
-            return res.status(status).json(response);
-        }
-        return successfulResponse(user, res);
+        return successfulResponse(user!, res);
     }catch(e){
         console.log('Error creating user');
         errorResponse(e as ErrorEvent, res);

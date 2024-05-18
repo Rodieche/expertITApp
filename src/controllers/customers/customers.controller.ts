@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { Customer, CustomerParams } from "../../models";
 import { errorResponse, successfulResponse } from "../../middlewares";
-import { paramsBuilder } from "../../helpers";
+import { paramsBuilder } from "../../helpers"; 
 
 export const createCustomer = async (req: Request, res: Response) => {
     const params = paramsBuilder(CustomerParams, req.body);

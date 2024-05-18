@@ -31,6 +31,10 @@ npm run dev
 2. Get all customer (paginate)  
 **Method**: GET  
 **uri**: /api/customers  
+**allowed query params**: [  
+    limit (default = 5),  
+    skip (default = 0)  
+]    
 **allowed body params**: null  
 
 3. Get customer
@@ -50,3 +54,38 @@ npm run dev
 **uri**: /api/customers/:id  
 **allowed body params**: null
 
+#### Users
+
+1. Create user  
+**Method**: POST  
+**uri**: /api/users  
+**allowed body params**: [  
+    name: string,  
+    email: string,  
+]  
+
+2. Get all users (paginate)  
+**Method**: GET  
+**uri**: /api/users
+**allowed query params**: [  
+    limit (default = 5),  
+    skip (default = 0)  
+]  
+**allowed body params**: null  
+
+3. Get user
+**Method**: GET  
+**uri**: /api/users/:email  
+**allowed body params**: null
+
+4. Update user  
+**Method**: PUT  
+**uri**: api/users/:id  
+**allowed body params**: [  
+    name: string  
+]  
+
+5. Delete user    
+**Method**: DELETE  
+**uri**: /api/users/:id  
+**allowed body params**: null
