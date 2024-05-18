@@ -15,3 +15,37 @@ docker compose up -d
 ```
 npm run dev
 ```
+---
+
+## Routes
+
+#### Customers
+
+1. Create customer
+Method: POST 
+uri: /api/customers
+allowed body params: [
+    name: string
+]
+
+2. Get all customer (paginate)
+Method: GET
+uri: /api/customers
+allowed body params: null
+
+3. Get customer
+Method: GET
+uri: /api/customers/:slug
+allowed body params: null
+
+4. Update customer
+Method: PUT
+uri: api/customers/:id
+allowed body params: [
+    name: string
+]
+
+5. Delete customer
+Method: DELETE
+uri: /api/customers/:id
+allowed body params: null
