@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { createCustomer, showCustomers, showSingleCustomer } from "../../controllers";
+import { createCustomer, deleteSingleCustomer, showCustomers, showSingleCustomer, updateSingleCustomer } from "../../controllers";
 import { check, query } from "express-validator";
-import { validateFields } from "../../middlewares";
+import { customerExist, validateFields } from "../../middlewares";
 
 export const router = Router();
 
@@ -24,5 +24,20 @@ router.route('/')
 
 router.route('/:slug')
 .get(
+    [
+        check('slug').custom(customerExist)
+    ],
     showSingleCustomer
+)
+.put(
+    [
+        check('slug').custom(customerExist)
+    ],
+    updateSingleCustomer
+)
+.delete(
+    [
+        check('slug').custom(customerExist)
+    ],
+    deleteSingleCustomer
 )
