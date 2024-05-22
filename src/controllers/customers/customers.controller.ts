@@ -70,5 +70,4 @@ export const deleteSingleCustomer = async (req: Request, res: Response) => {
         console.log('Error deleting customer');
         return errorResponse(e as ErrorEvent, res);
     }
-    
 }

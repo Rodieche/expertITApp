@@ -6,12 +6,13 @@ interface ITeamDocument extends ITeam, Document {}
 
 const TeamSchema: mongoose.Schema = new mongoose.Schema({
     name: { type: String, required: true},
+    state: { type: Boolean, default: true }
 });
 
 export const TeamsParams = validParamsGenerator(TeamSchema);
 
 TeamSchema.methods.toJSON = function(){
-    const { __v, ...data } = this.toObject();
+    const { __v, state, ...data } = this.toObject();
     return data;
 }
 

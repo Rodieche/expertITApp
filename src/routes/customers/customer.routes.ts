@@ -27,7 +27,8 @@ router.route('/:slug')
     [
         check('slug').isString().not().optional(),
         check('slug').custom(IsValidCustomer),
-        check('slug').custom(customerExist)
+        check('slug').custom(customerExist),
+        validateFields
     ],
     showSingleCustomer
 )
@@ -36,6 +37,7 @@ router.route('/:slug')
         check('slug').isMongoId(),
         check('slug').custom(customerExist),
         check('slug').custom(IsValidCustomer),
+        validateFields
     ],
     updateSingleCustomer
 )
@@ -44,6 +46,7 @@ router.route('/:slug')
         check('slug').isMongoId(),
         check('slug').custom(customerExist),
         check('slug').custom(IsValidCustomer),
+        validateFields
     ],
     deleteSingleCustomer
 )
