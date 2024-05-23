@@ -10,6 +10,7 @@ router.route('/')
     [
         check('email').isEmail().not().optional(),
         check('name').isString().not().optional(),
+        validateFields
     ],
     createUser
 )
@@ -27,7 +28,8 @@ router.route('/:email')
     [
         check('email').isEmail().not().optional(),
         check('email').custom(UserExist),
-        check('email').custom(IsValidUser)
+        check('email').custom(IsValidUser),
+        validateFields
     ],
     showUser
 )
@@ -35,7 +37,8 @@ router.route('/:email')
     [
         check('email').isMongoId(),
         check('email').custom(UserExist),
-        check('email').custom(IsValidUser)
+        check('email').custom(IsValidUser),
+        validateFields
     ],
     updateUser
 )
@@ -43,7 +46,8 @@ router.route('/:email')
     [
         check('email').isMongoId(),
         check('email').custom(UserExist),
-        check('email').custom(IsValidUser)
+        check('email').custom(IsValidUser),
+        validateFields
     ],
     deleteUser
 )
