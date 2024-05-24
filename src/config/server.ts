@@ -2,10 +2,9 @@ import express, { Express, Request, Response , Application } from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import morgan from 'morgan';
-import { customerRouter, userRouter } from '../routes';
 
 import { envs } from '../plugins/envs.plugin';
-import { MongoDatabase } from './';
+import { MongoDatabase, router } from './';
 
 export class Server{
 
@@ -15,7 +14,7 @@ export class Server{
     constructor(){
         this.config();
         this.middlewares();
-        this.routes();
+        router(this.app);
         this.start();
     }
 
@@ -28,11 +27,6 @@ export class Server{
         this.app.use(morgan('dev'));
         this.app.use(express.urlencoded({extended: true}));
         this.app.use(express.json());
-    }
-
-    routes(){
-        this.app.use('/api/customers', customerRouter );
-        this.app.use('/api/users', userRouter)
     }
 
     async start(){
