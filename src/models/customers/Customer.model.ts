@@ -9,6 +9,7 @@ const CustomerSchema: mongoose.Schema = new mongoose.Schema({
     name: { type: String, required: true, unique: true },
     slug: { type: String, unique: true },
     state: { type: Boolean, default: true },
+    image: { type: String },
     // users: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
 });
 
