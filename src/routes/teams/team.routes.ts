@@ -8,7 +8,8 @@ export const router = Router();
 router.route('/')
 .post(
     [
-        check('name').isString().not().optional(),
+        check('name').isString().withMessage('The Team name must be an string'),
+        check('name').not().isEmpty().withMessage('A name is required to create a Team'),
         validateFields
     ], 
     createTeam

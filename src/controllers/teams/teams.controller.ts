@@ -19,12 +19,12 @@ export const showTeams = async (req: Request, res: Response) => {
     const { skip = 0, limit = 5 } = req.query;
     const query = { state: true };
     try{
-        const [customers, totalCustomers] = await Promise.all([
+        const [teams, totalCustomers] = await Promise.all([
             Team.find(query).limit(Number(limit)).skip(Number(skip)),
             Team.countDocuments(query)
         ]);
         const data = {
-            customers,
+            teams,
             total: totalCustomers
         }
         return successfulResponse(data, res);
