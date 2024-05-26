@@ -89,3 +89,38 @@ npm run dev
 **Method**: DELETE  
 **uri**: /api/users/:id  
 **allowed body params**: null
+
+#### Teams
+
+1. Create team  
+**Method**: POST  
+**uri**: /api/teams  
+**allowed body params**: [  
+    name: string,  
+]  
+
+2. Get all teams (paginate)  
+**Method**: GET  
+**uri**: /api/teams
+**allowed query params**: [  
+    limit (default = 5),  
+    skip (default = 0)  
+]  
+**allowed body params**: null  
+
+3. Get team
+**Method**: GET  
+**uri**: /api/teams/:id  
+**allowed body params**: null
+
+4. Update team   
+**Method**: PUT  
+**uri**: api/teams/:id  
+**allowed body params**: [  
+    name: string  
+]  
+
+5. Delete team    
+**Method**: DELETE  
+**uri**: /api/teams/:id  
+**allowed body params**: null

@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { check, query } from "express-validator";
-import { TeamExist, validateFields } from "../../middlewares";
+import { IsValidTeam, TeamExist, validateFields } from "../../middlewares";
 import { createTeam, deleteTeam, showTeam, showTeams, updateTeam } from "../../controllers";
 
 export const router = Router();
@@ -15,29 +15,36 @@ router.route('/')
     createTeam
 )
 .get(
+    [
+        query('limit').isInt({ min: 0 }).optional().withMessage('limit query param must be greater than 0'),
+        query('skip').isInt({ min: 0 }).optional().withMessage('skip query param must be greater than 0'),
+        validateFields
+    ],
     showTeams
 )
 
 router.route('/:id')
 .get(
     [
-        check('id').isMongoId(),
+        check('id').isMongoId().withMessage('The id is not valid'),
         validateFields
     ],
     showTeam
 )
 .put(
     [
-        check('id').isMongoId(),
-        check('id').custom(TeamExist),
+        check('id').isMongoId().withMessage('The id is not valid'),
+        check('id').custom(TeamExist).withMessage('The Team does not exist'),
+        check('id').custom(IsValidTeam).withMessage('The Team is not valid'),
         validateFields
     ],
     updateTeam
 )
 .delete(
     [
-        check('id').isMongoId(),
-        check('id').custom(TeamExist),
+        check('id').isMongoId().withMessage('The id is not valid'),
+        check('id').custom(TeamExist).withMessage('The Team does not exist'),
+        check('id').custom(IsValidTeam).withMessage('The Team is not valid'),
         validateFields
     ],
     deleteTeam

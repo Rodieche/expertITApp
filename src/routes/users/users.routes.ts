@@ -16,8 +16,8 @@ router.route('/')
 )
 .get(
     [
-        query('limit').isInt({ min: 0 }).optional(),
-        query('skip').isInt({ min: 0 }).optional(),
+        query('limit').isInt({ min: 0 }).optional().withMessage('limit query param must be greater than 0'),
+        query('skip').isInt({ min: 0 }).optional().withMessage('skip query param must be greater than 0'),
         validateFields
     ],
     showUsers

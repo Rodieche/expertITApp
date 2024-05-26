@@ -8,15 +8,16 @@ export const router = Router();
 router.route('/')
 .post(
     [
-        check('name').trim().isString().not().isEmpty(),
+        check('name').not().isEmpty().withMessage('Name must not be empty'),
+        check('name').trim().isString().withMessage('Name must be a string'),
         validateFields
     ], 
     createCustomer
 )
 .get(
     [
-        query('limit').isInt({ min: 0 }).optional(),
-        query('skip').isInt({ min: 0 }).optional(),
+        query('limit').isInt({ min: 0 }).optional().withMessage('limit query param must be greater than 0'),
+        query('skip').isInt({ min: 0 }).optional().withMessage('skip query param must be greater than 0'),
         validateFields
     ],
     showCustomers
@@ -25,27 +26,27 @@ router.route('/')
 router.route('/:slug')
 .get(
     [
-        check('slug').isString().not().optional(),
-        check('slug').custom(IsValidCustomer),
-        check('slug').custom(customerExist),
+        check('slug').isString().not().optional().withMessage('Slug name must be provided'),
+        check('slug').custom(IsValidCustomer).withMessage('The customer is not valid'),
+        check('slug').custom(customerExist).withMessage('Customer does not exist'),
         validateFields
     ],
     showSingleCustomer
 )
 .put(
     [
-        check('slug').isMongoId(),
-        check('slug').custom(customerExist),
-        check('slug').custom(IsValidCustomer),
+        check('slug').isMongoId().withMessage('The id is not valid'),
+        check('slug').custom(IsValidCustomer).withMessage('The customer is not valid'),
+        check('slug').custom(customerExist).withMessage('Customer does not exist'),
         validateFields
     ],
     updateSingleCustomer
 )
 .delete(
     [
-        check('slug').isMongoId(),
-        check('slug').custom(customerExist),
-        check('slug').custom(IsValidCustomer),
+        check('slug').isMongoId().withMessage('The id is not valid'),
+        check('slug').custom(IsValidCustomer).withMessage('The customer is not valid'),
+        check('slug').custom(customerExist).withMessage('Customer does not exist'),
         validateFields
     ],
     deleteSingleCustomer
