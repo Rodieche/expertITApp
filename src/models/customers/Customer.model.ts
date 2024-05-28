@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 import { ICustomer } from '../../dtos';
 import slugify from 'slugify';
 import { validParamsGenerator } from '../../helpers';
@@ -10,6 +10,10 @@ const CustomerSchema: mongoose.Schema = new mongoose.Schema({
     slug: { type: String, unique: true },
     state: { type: Boolean, default: true },
     image: { type: String },
+    team: {
+        type: Schema.Types.ObjectId,
+        ref: "Team"
+    }
     // users: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
 });
 

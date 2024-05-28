@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 import { ITeam } from '../../dtos';
 import { validParamsGenerator } from '../../helpers';
 
@@ -6,7 +6,11 @@ interface ITeamDocument extends ITeam, Document {}
 
 const TeamSchema: mongoose.Schema = new mongoose.Schema({
     name: { type: String, required: true, unique: true},
-    state: { type: Boolean, default: true }
+    state: { type: Boolean, default: true },
+    customers:[{
+        type: Schema.Types.ObjectId,
+        ref: "Customer"
+    }]
 });
 
 export const TeamsParams = validParamsGenerator(TeamSchema);
