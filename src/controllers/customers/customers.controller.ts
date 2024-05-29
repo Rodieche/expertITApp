@@ -12,8 +12,6 @@ export const createCustomer = async (req: Request, res: Response) => {
         console.log('Error on Customer creation');
         return errorResponse(e as ErrorEvent, res);
     }
-    
-    
 }
 
 export const showCustomers = async (req: Request, res: Response) => {

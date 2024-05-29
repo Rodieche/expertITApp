@@ -1,3 +1,3 @@
 export * from './customers/Customer.model';
-export * from './users/users.model';
-export * from './team/team.model';
+export * from './users/Users.model';
+export * from './team/Team.model';

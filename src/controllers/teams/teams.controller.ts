@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { paramsBuilder } from "../../helpers";
 import { Team, TeamsParams } from "../../models";
 import { errorResponse, successfulResponse } from "../../middlewares";
+import { Customer } from '../../models/customers/Customer.model';
 
 export const createTeam = async (req: Request, res: Response) => {
     try{
@@ -19,7 +20,7 @@ export const showTeams = async (req: Request, res: Response) => {
     const { skip = 0, limit = 5 } = req.query;
     const query = { state: true };
     try{
-        const [teams, totalCustomers] = await Promise.all([
+        let [teams, totalCustomers] = await Promise.all([
             Team.find(query).limit(Number(limit)).skip(Number(skip)),
             Team.countDocuments(query)
         ]);
@@ -36,12 +37,18 @@ export const showTeams = async (req: Request, res: Response) => {
 
 export const showTeam = async (req: Request, res: Response) => {
     const { id } = req.params;
-    try{
-        const team = await Team.findById(id)
-        return successfulResponse(team!, res);
-    }catch(e){
-        console.log('Error searching team');
-        return errorResponse(e as ErrorEvent, res);
+    try {
+        const team = await Team.findById(id).populate({
+            path: 'customers',
+            match: { state: true } // Filtrar clientes por estado si es necesario
+        }).exec(); // Asegurarse de ejecutar la consulta
+        if (!team) {
+            return res.status(404).json({ message: 'Team not found' });
+        }
+        return successfulResponse(team, res);
+    } catch (e) {
+        console.log('Error searching team:', e);
+        return errorResponse(e as Error, res);
     }
 }
 

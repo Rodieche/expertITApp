@@ -1,9 +1,10 @@
-import { IUser } from "..";
+import { Types } from 'mongoose';
 
-export interface ICustomer{
-    _id?: any;
+export interface ICustomer {
+    _id?: Types.ObjectId;
     name: string;
     slug: string;
     state: boolean;
-    // users?: IUser[];
-} 
+    image?: string;
+    team?: Types.ObjectId;
+}
