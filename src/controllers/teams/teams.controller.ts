@@ -2,37 +2,21 @@ import { Request, Response } from "express";
 import { paramsBuilder } from "../../helpers";
 import { Team, TeamsParams } from "../../models";
 import { errorResponse, successfulResponse } from "../../middlewares";
-import { Customer } from '../../models/customers/Customer.model';
+import { createTeamService, getTeamsService } from "../../services";
 
 export const createTeam = async (req: Request, res: Response) => {
-    try{
-
         const params = paramsBuilder(TeamsParams, req.body);
-        const team = await Team.create(params);
-        return successfulResponse(team, res);
-    }catch(e){
-        console.log('Error on Team creation');
-        return errorResponse(e as ErrorEvent, res);
-    }
+        const team = await createTeamService(params, res);
+        return successfulResponse(team!, res);
 }
 
 export const showTeams = async (req: Request, res: Response) => {
-    const { skip = 0, limit = 5 } = req.query;
+    let { skip = 0, limit = 5 } = req.query;
+    skip = Number(skip) | 0;
+    limit = Number(limit) | 5
     const query = { state: true };
-    try{
-        let [teams, totalCustomers] = await Promise.all([
-            Team.find(query).limit(Number(limit)).skip(Number(skip)),
-            Team.countDocuments(query)
-        ]);
-        const data = {
-            teams,
-            total: totalCustomers
-        }
-        return successfulResponse(data, res);
-    }catch(e){
-        console.log('Error on Team creation');
-        return errorResponse(e as ErrorEvent, res);
-    }
+    const data = await getTeamsService(query, skip, limit, res);
+    return successfulResponse(data!, res);
 }
 
 export const showTeam = async (req: Request, res: Response) => {

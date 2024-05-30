@@ -1,4 +1,4 @@
-type BodyType = { [key: string]: any };
+export type BodyType = { [key: string]: any };
 
 export const paramsBuilder = (validParams: string[], body: BodyType): BodyType => {
     // Verificar que validParams es un array y body es un objeto
